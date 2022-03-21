@@ -19,22 +19,22 @@ class ProductPage(BasePage): # наследует все методы от BaseP
             # Задаем счетчик ожидания в 10 секунд и отслеживаем изменение, сравнивая его с текстом
             WebDriverWait(self.browser, 10).until(
                 EC.text_to_be_present_in_element((By.CSS_SELECTOR, 'div.alertinner'),
-                                                 "The shellcoder's handbook has been added to your basket."))
-            message = self.browser.find_elements(By.CSS_SELECTOR, 'div.alertinner')
+                                                 "added to your basket"))
+            message = self.browser.find_elements(By.CSS_SELECTOR, 'div.alertinner strong')
 
             title = self.browser.find_element(*ProductPageLocators.TITLE_PRODUCT)
             title = title.text
 
             message_title = message[0].text
 
-            assert title in message_title, "Error title in the cart"
+            assert title == message_title, "Error title in the cart"
 
             price = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT)
             price = price.text
 
             message_price = message[2].text
 
-            assert price in message_price, "Error price in the cart"
+            assert price == message_price, "Error price in the cart"
 
         finally:
             pass
