@@ -12,3 +12,8 @@ class LoginPageLocators():
     REGISTRATION_EMAIL = (By.NAME, "registration-email")
     REGISTRATION_PASSWORD_1 = (By.NAME, "registration-password1")
     REGISTRATION_PASSWORD_2 = (By.NAME, "registration-password2")
+
+
+class ProductPageLocators():
+    TITLE_PRODUCT = (By.CSS_SELECTOR, 'div.product_main>h1')
+    PRICE_PRODUCT = (By.CSS_SELECTOR, 'div.product_main p.price_color')
