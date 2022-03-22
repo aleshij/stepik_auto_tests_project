@@ -1,5 +1,19 @@
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 import pytest
+
+
+# lesson 4.3.10
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_basket_link()
+    page.go_to_basket_page()
+    # получить текущий url страницы lesson 4.2.9
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.should_be_empty_basket()
+    basket_page.should_be_message_empty_basket()
+
 
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 
@@ -55,9 +69,6 @@ def test_should_see_product_page(browser, url):
     page.should_see_product_description()
 
 
-# @pytest.mark.parametrize('url', [
-#                                 "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear",
-#                                 "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"])
 # @pytest.mark.parametrize(
 #     "url",
 #     [
