@@ -39,4 +39,13 @@ class ProductPage(BasePage): # наследует все методы от BaseP
         finally:
             pass
 
+    # проверить отсутствие элемента, не реализована до конца
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_not_be_success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
 
