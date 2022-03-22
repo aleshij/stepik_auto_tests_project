@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from .locators import BasePageLocators
 import math
 import time
@@ -24,6 +25,13 @@ class BasePage():
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
+
+    # lesson 4.3.13
+    def should_be_authorized_user(self):
+        # Задаем счетчик ожидания в 10 секунд и отслеживаем изменение, сравнивая его с текстом
+        WebDriverWait(self.browser, 15).until(lambda l: l.find_element(By.LINK_TEXT, "Logout"))
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
 
     # lesson 4.3.10
     def should_be_basket_link(self):
