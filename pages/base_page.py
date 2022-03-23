@@ -8,16 +8,19 @@ from .locators import BasePageLocators
 import math
 import time
 
-
+# task 4.2.2
+# task 4.2.6
 class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    # task 4.2.2
     def open(self):
         self.browser.get(self.url)
 
+    # task 4.3.8
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
         link.click()
@@ -26,14 +29,14 @@ class BasePage():
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
 
-    # lesson 4.3.13
+    # task 4.3.13
     def should_be_authorized_user(self):
         # Задаем счетчик ожидания в 10 секунд и отслеживаем изменение, сравнивая его с текстом
         WebDriverWait(self.browser, 15).until(lambda l: l.find_element(By.LINK_TEXT, "Logout"))
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
                                                                      " probably unauthorised user"
 
-    # lesson 4.3.10
+    # task 4.3.10
     def should_be_basket_link(self):
         assert self.is_element_present(*BasePageLocators.BASKET_LINK), "Basket link is not presented"
 
@@ -41,7 +44,7 @@ class BasePage():
         link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
         link.click()
 
-
+    # task 4.2.6
     def is_element_present(self, how, what): # перехватывает исключение, существуют ли запрашиваемые поля
         try:
             self.browser.find_element(how, what)
@@ -49,6 +52,7 @@ class BasePage():
             return False
         return True
 
+    # task 4.3.5
     # is_not_element_present: упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
     def is_not_element_present(self, how, what, timeout=4):
         try:
@@ -68,6 +72,7 @@ class BasePage():
 
         return True
 
+    # task 4.3.2
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]

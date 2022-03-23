@@ -2,7 +2,7 @@ from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from .locators import BasketPageLocators
 
-# 4.3.10
+# task 4.3.10
 class BasketPage(BasePage): # наследует все методы от BasePage
     def should_be_empty_basket(self):
         assert self.is_not_element_present(*BasketPageLocators.BASKET_TITLE), \

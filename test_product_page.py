@@ -6,17 +6,13 @@ import time
 import random
 
 
-
-
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 
 
-# lesson 4.3.13
-
+# task 4.3.13
 email = str(time.time()) + "@fakemail.org"
 count = random.randint(1, 100)
 password = str(time.time() + count)
-
 
 @pytest.mark.user
 class TestUserAddToBasketFromProductPage():
@@ -33,6 +29,7 @@ class TestUserAddToBasketFromProductPage():
         page.open()
         page.should_not_be_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         page = ProductPage(browser, link)
         page.open()
@@ -41,8 +38,9 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_correct()
 
 
-# lesson 4.3.10
-def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+# task 4.3.10
+@pytest.mark.need_review
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
     page.should_be_basket_link()
@@ -52,7 +50,7 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     basket_page.should_be_empty_basket()
     basket_page.should_be_message_empty_basket()
 
-
+# task 4.3.6
 # тест сразу падает
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link)
@@ -75,8 +73,8 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.add_product_in_cart()
     page.should_not_be_success_message_is_disappeared()
 
-
-# маркерованные тест start, маркеры стоят в pytest.nin
+# task 4.3.8
+# маркерованные тесты start, маркеры стоят в pytest.ini
 @pytest.mark.start
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -85,14 +83,16 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 @pytest.mark.start
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
-    page.go_to_login_page() #авдает так как в locators.py указан не верный селектор
+    page.go_to_login_page() #падает так как в locators.py указан не верный селектор
 
 
+# task 4.3.2
 @pytest.mark.skip
 @pytest.mark.parametrize('url', [
                                 "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear",
@@ -104,6 +104,7 @@ def test_should_see_product_page(browser, url):
     page.should_see_product_description()
 
 
+# task 4.3.4
 # @pytest.mark.parametrize(
 #     "url",
 #     [
@@ -111,6 +112,8 @@ def test_should_see_product_page(browser, url):
 #     ]
 # )
 
+# task 4.3.4
+@pytest.mark.need_review
 @pytest.mark.skip
 @pytest.mark.parametrize('url', [f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{i}" if i != 7
             else pytest.param(f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{i}", marks=pytest.mark.xfail)

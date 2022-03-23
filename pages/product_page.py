@@ -39,7 +39,7 @@ class ProductPage(BasePage): # наследует все методы от BaseP
         finally:
             pass
 
-
+    # 4.3.5
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Success message is presented, but should not be"

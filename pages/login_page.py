@@ -7,6 +7,7 @@ import time
 
 
 class LoginPage(BasePage):
+    # task 4.2.8
     def should_be_login_page(self):
         self.should_be_login_url()
         self.should_be_login_form()
@@ -27,7 +28,7 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_PASSWORD_1), "Field Password is not presented"  # смотреть файл locators.py
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_PASSWORD_2), "Field Password check is not presented"  # смотреть файл locators.py
 
-    # 4.3.13
+    # task 4.3.13
     def register_new_user(self, email, password):
         email_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL)
         email_field.send_keys(email)
